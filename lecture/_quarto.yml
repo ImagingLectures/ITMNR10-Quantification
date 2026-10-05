@@ -1,0 +1,36 @@
+project:
+  type: default
+  output-dir: _output
+  # Only generated files are rendered; the notebooks are never rendered
+  # directly, they are assembled into these files by scripts/build.py.
+  render:
+    - "course-notes.qmd"
+    - "Lectures/*/*-slides.qmd"
+    - "Lectures/*/*-notes.qmd"
+  resources:
+    - "assets/**"
+    - "Lectures/*/movies/"
+
+execute:
+  freeze: auto        # re-execute only when a notebook actually changed
+  echo: true
+  warning: false
+  error: false
+  daemon: true
+
+# Cross-reference labels, applied to both slides and notes.
+crossref:
+  fig-title: Figure
+  tbl-title: Table
+  eq-prefix: Eq.
+  fig-prefix: Fig.
+  tbl-prefix: Tab.
+
+format:
+  html:
+    fig-format: svg
+  pdf:
+    fig-format: pdf
+
+bibliography: references.bib
+citation-location: document

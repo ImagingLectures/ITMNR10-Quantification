@@ -1,0 +1,26 @@
+# ---------------------------------------------------------------------------
+# Course-wide metadata.
+#
+# Everything here is injected into the generated .qmd files by
+# scripts/build.py.  Values can be overridden per lecture in
+# Lectures/LectureNN/lecture.yml.
+# ---------------------------------------------------------------------------
+
+title: "Quantification and uncertainties in neutron imaging"
+short-title: "ITMNR-10 Lecture"
+
+author: "Dr. Anders Kaestner"
+institute: "Paul Scherrer Institut"
+date: "2026-10-12"
+
+bibliography: references.bib
+
+# Branding assets, relative to the project root.
+# For each asset keep an .svg (slides) and a .png or .pdf (LaTeX) side by
+# side; build.py picks the raster/PDF variant automatically for the notes.
+# eth-logo: assets/logos/eth-logo.svg
+psi-logo: assets/logos/psi-logo.svg
+
+# Artwork used on the title page of the complete course notes.
+# Per-lecture artwork is set in Lectures/LectureNN/lecture.yml.
+artwork: assets/artwork/course.svg

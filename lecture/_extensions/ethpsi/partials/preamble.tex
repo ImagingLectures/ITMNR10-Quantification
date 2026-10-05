@@ -1,0 +1,70 @@
+% ====================================================================
+%  ETH / PSI lecture notes -- preamble
+% ====================================================================
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{emptypage}
+
+% ------------------------------------------------------------ colours
+\definecolor{ethblue}{RGB}{33,92,175}
+\definecolor{ethpetrol}{RGB}{0,120,148}
+\definecolor{psired}{RGB}{200,16,46}
+\definecolor{ethgrey}{RGB}{59,59,59}
+
+% -------------------------------------------------------- numbering
+%  chapter  = lecture   (level 0)
+%  section  = part      (level 1)  -> "1.2"
+%  figures, tables and equations run per part -> "1.2.3"
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+\setcounter{secnumdepth}{3}   % number down to level 3 headings
+\setcounter{tocdepth}{3}      % list level 3 headings in the ToC
+
+% ------------------------------------------------- heading appearance
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\huge\bfseries\color{ethblue}}
+  {\normalfont\sffamily\Large\color{psired}\chaptertitlename\ \thechapter}
+  {12pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{10pt}{28pt}
+
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries\color{ethblue}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries\color{ethpetrol}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\normalsize\bfseries\color{ethgrey}}{\thesubsubsection}{1em}{}
+
+% "Chapter 1" reads better as "Lecture 1" in this document class.
+\renewcommand{\chaptername}{Lecture}
+
+% -------------------------------------------------- headers / footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\nouppercase{\leftmark}}
+\fancyhead[R]{\small\sffamily\color{ethblue}\ethpsiCourseTitle}
+\fancyfoot[C]{\small\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\small\sffamily\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% Course title used in the running head; overridden from the YAML metadata
+% by before-body.tex when `course-title` is set.
+\providecommand{\ethpsiCourseTitle}{}
+
+% ------------------------------------------------------------- misc
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.15}

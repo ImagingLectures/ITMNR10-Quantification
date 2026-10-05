@@ -1,0 +1,316 @@
+/*-- scss:defaults --*/
+
+// ---------------------------------------------------------------- palette
+$eth-blue:      #215CAF;   // ETH Zurich corporate blue
+$eth-petrol:    #007894;
+$eth-bronze:    #8E6713;
+$psi-red:       #C8102E;   // PSI accent
+$grey-dark:     #3B3B3B;
+$grey-light:    #E8EAED;
+
+$body-bg:        #FFFFFF;
+$body-color:     $grey-dark;
+$link-color:     $eth-blue;
+$selection-bg:   rgba($eth-blue, 0.25);
+
+// ------------------------------------------------------------ typography
+$font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+  sans-serif !default;
+$font-family-monospace: "Source Code Pro", "SFMono-Regular", Consolas, monospace !default;
+
+$presentation-font-size-root: 34px;
+$presentation-line-height: 1.35;
+$presentation-h1-font-size: 2.0em;
+$presentation-h2-font-size: 1.35em;
+$presentation-h3-font-size: 1.05em;
+$presentation-h4-font-size: 0.9em;
+$presentation-heading-color: $eth-blue;
+$presentation-heading-font-weight: 600;
+$presentation-title-slide-text-align: left;
+
+$code-block-font-size: 0.62em;
+$code-block-bg: #F6F7F9;
+$code-block-border-color: $grey-light;
+
+
+/*-- scss:rules --*/
+
+// ===========================================================================
+//  Geometry
+//
+//  The deck is 1600x900 and reveal's own `margin` is 0, so every length below
+//  is in deck pixels and nothing is inset twice.  Slides carry the padding;
+//  the chrome (logos, footer, slide number) is positioned against the slide's
+//  padding box, which is exactly why the ETH logo and the slide title share
+//  the same left edge at any window size or aspect ratio.
+//
+//      +--------------------------------------------------+
+//      |             ^ --ethpsi-band                       |
+//      |  [ETH logo]                         [12 / 34]     |  <- chrome
+//      |             ^ --ethpsi-gap                        |
+//      |  Slide title ------------------------------       |  <- content
+//      |  body ...                                         |
+//      |             v --ethpsi-gap                        |
+//      |  Course | date                     [PSI logo]     |  <- chrome
+//      |             v --ethpsi-band                       |
+//      +--------------------------------------------------+
+//        |<- inset                             inset ->|
+// ===========================================================================
+
+:root {
+  --ethpsi-inset: 64px;       // left/right inset, shared by chrome + content
+  --ethpsi-band: 32px;        // slide edge -> chrome
+  --ethpsi-logo-h: 44px;      // logo height
+  --ethpsi-gap: 26px;         // chrome -> content
+  --ethpsi-blue: #{$eth-blue};
+  --ethpsi-red: #{$psi-red};
+}
+
+// Distance from the padding box back out to the chrome row.
+$chrome-offset: calc(-1 * (var(--ethpsi-logo-h) + var(--ethpsi-gap)));
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  box-sizing: border-box;
+  height: 100%;
+  padding: calc(var(--ethpsi-band) + var(--ethpsi-logo-h) + var(--ethpsi-gap))
+           var(--ethpsi-inset);
+}
+
+// ---------------------------------------------------------- slide chrome
+// _slide-chrome.html clones this block into every slide, so it lives in the
+// deck's coordinate system and scales with the content.  It also means each
+// page of the printed PDF carries its own logos.
+.reveal .ethpsi-chrome {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+
+  img {
+    position: absolute;
+    height: var(--ethpsi-logo-h);
+    width: auto;
+    border: none;
+    box-shadow: none;
+    background: none;
+    margin: 0;
+    max-width: none;
+    max-height: none;
+  }
+
+  .ethpsi-logo-eth {
+    left: 0;
+    top: $chrome-offset;
+  }
+
+  .ethpsi-logo-psi {
+    right: 0;
+    bottom: $chrome-offset;
+  }
+
+  .ethpsi-footer {
+    position: absolute;
+    left: 0;
+    bottom: $chrome-offset;
+    height: var(--ethpsi-logo-h);
+    display: flex;
+    align-items: center;
+    font-size: 0.42em;
+    color: rgba($grey-dark, 0.7);
+    letter-spacing: 0.02em;
+  }
+
+  .ethpsi-slide-number {
+    position: absolute;
+    right: 0;
+    top: $chrome-offset;
+    height: var(--ethpsi-logo-h);
+    display: flex;
+    align-items: center;
+    font-size: 0.40em;
+    color: rgba($grey-dark, 0.55);
+  }
+}
+
+// The title slide keeps the logos but drops the running footer.
+.reveal .ethpsi-chrome-title {
+  .ethpsi-footer,
+  .ethpsi-slide-number {
+    display: none;
+  }
+}
+
+.reveal .progress {
+  color: $eth-blue;
+  height: 4px;
+}
+
+// ------------------------------------------------------------- slide body
+.reveal h2 {
+  text-align: left;
+  margin: 0 0 0.5em 0;
+  padding-bottom: 0.18em;
+  border-bottom: 2px solid rgba($eth-blue, 0.25);
+  hyphens: none;
+}
+
+.reveal h3 {
+  text-align: left;
+  color: $eth-petrol;
+  margin-top: 0.6em;
+  margin-bottom: 0.25em;
+}
+
+.reveal h4 {
+  text-align: left;
+  color: $grey-dark;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.reveal ul,
+.reveal ol {
+  margin-left: 0.4em;
+}
+
+.reveal li {
+  margin-bottom: 0.25em;
+}
+
+.reveal strong {
+  color: $eth-blue;
+}
+
+.reveal a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba($eth-blue, 0.4);
+}
+
+.reveal blockquote {
+  border-left: 4px solid $eth-blue;
+  background: rgba($eth-blue, 0.04);
+  box-shadow: none;
+  font-style: normal;
+  padding: 0.5em 0.8em;
+}
+
+.reveal table {
+  font-size: 0.7em;
+  th {
+    border-bottom: 2px solid $eth-blue;
+    color: $eth-blue;
+  }
+  td,
+  th {
+    border-color: $grey-light;
+  }
+}
+
+// Keep generated plots inside the content band instead of overflowing it.
+.reveal .cell-output-display img,
+.reveal .cell-output-display svg,
+.reveal figure img {
+  max-width: 100%;
+  max-height: 58vh;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.reveal figcaption,
+.reveal .figure-caption {
+  font-size: 0.5em;
+  color: rgba($grey-dark, 0.75);
+  text-align: left;
+}
+
+.reveal pre code {
+  border-radius: 4px;
+  max-height: 58vh;
+}
+
+.reveal .callout {
+  font-size: 0.85em;
+}
+
+// --------------------------------------------------- part separator slide
+// A level-1 heading (#) opens a new part.  Only slides that directly own an
+// <h1> are centred, so reveal's vertical stack wrappers stay untouched.
+.reveal .slides section:has(> h1) {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides section > h1 {
+  color: $eth-blue;
+  border-left: 10px solid $psi-red;
+  padding-left: 0.4em;
+  margin-left: 0;
+  text-align: left;
+  hyphens: none;
+}
+
+// ------------------------------------------------------------ title slide
+.reveal .ethpsi-title-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  column-gap: 3rem;
+  height: 100%;
+}
+
+.reveal .ethpsi-title-text {
+  .ethpsi-course {
+    font-size: 0.55em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $psi-red;
+    margin-bottom: 0.6em;
+  }
+  h1.title {
+    font-size: 1.7em;
+    line-height: 1.15;
+    color: $eth-blue;
+    margin: 0 0 0.25em 0;
+    border: none;
+    padding: 0;
+    hyphens: none;
+  }
+  .subtitle {
+    font-size: 0.72em;
+    color: $grey-dark;
+    margin-bottom: 1.4em;
+  }
+  .ethpsi-rule {
+    width: 140px;
+    height: 3px;
+    background: $eth-blue;
+    margin: 0 0 1.2em 0;
+  }
+  .author,
+  .date {
+    font-size: 0.55em;
+    color: $grey-dark;
+    margin: 0.15em 0;
+  }
+}
+
+.reveal .ethpsi-title-art {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  img {
+    max-height: 66vh;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+    background: none;
+  }
+}

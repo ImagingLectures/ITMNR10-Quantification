@@ -1,0 +1,94 @@
+title: ETH / PSI Lecture
+author: Course infrastructure
+version: 1.0.0
+quarto-required: ">=1.4.0"
+
+contributes:
+  formats:
+
+    # ---------------------------------------------------------------- common
+    common:
+      link-citations: true
+      citations-hover: true
+      fig-align: center
+      lang: en
+      code-copy: true
+      code-overflow: wrap
+      highlight-style: github
+
+    # -------------------------------------------------------------- revealjs
+    revealjs:
+      theme: [default, ethpsi-slides.scss]
+      # Level 1 (#)  -> part separator slide
+      # Level 2 (##) -> one slide
+      # Level 3 (###)-> heading inside a slide
+      slide-level: 2
+      width: 1600
+      height: 900
+      # The deck must not add its own margin: all insets are applied inside
+      # the slide (see --ethpsi-inset in ethpsi-slides.scss) so that the
+      # logos, the footer and the slide titles share one coordinate system.
+      margin: 0
+      min-scale: 0.2
+      max-scale: 2.0
+      center: false
+      # Ship one portable HTML file. This is also what makes the logos,
+      # artwork and figures survive being moved, mailed or printed to PDF.
+      embed-resources: true
+      transition: none
+      background-transition: none
+      # No `footer:` key and no reveal slide number on purpose: both are drawn
+      # per slide by _slide-chrome.html so that they scale with the deck
+      # instead of sticking to the viewport.
+      slide-number: false
+      # A level-1 heading opens a vertical stack in reveal.js; linear
+      # navigation keeps left/right arrows walking through every slide.
+      navigation-mode: linear
+      hash: true
+      history: true
+      controls: false
+      progress: true
+      pdf-separate-fragments: false
+      template-partials:
+        - partials/title-slide.html
+      title-slide-attributes:
+        data-background-color: "#ffffff"
+      fig-width: 9
+      fig-height: 5
+      fig-format: svg
+
+    # ------------------------------------------------------------------- pdf
+    pdf:
+      documentclass: report
+      classoption: [11pt, oneside]
+      papersize: a4
+      geometry:
+        - top=25mm
+        - bottom=25mm
+        - left=28mm
+        - right=25mm
+        - headheight=15pt
+      # Level 1 (#) becomes \section so that the injected \chapter (the
+      # lecture) stays level 0.  Numbering therefore reads
+      # <lecture>.<part>.<running index>.
+      top-level-division: section
+      number-sections: true
+      number-depth: 3
+      # The table of contents is emitted into the document body by
+      # scripts/build.py, not by the template, so that it cannot be affected
+      # by the custom before-body partial. Keep this false.
+      toc: false
+      toc-depth: 3
+      colorlinks: true
+      linkcolor: ethblue
+      citecolor: ethblue
+      urlcolor: ethblue
+      fig-pos: "htbp"
+      cap-location: bottom
+      fig-width: 6.5
+      fig-height: 4
+      fig-format: pdf
+      include-in-header:
+        - partials/preamble.tex
+      template-partials:
+        - partials/before-body.tex

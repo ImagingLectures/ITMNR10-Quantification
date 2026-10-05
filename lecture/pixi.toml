@@ -1,0 +1,68 @@
+[workspace]
+name = "quarto-lecture-suite"
+version = "1.0.0"
+description = "ETH/PSI lecture suite: revealjs slides and PDF notes from one notebook source"
+authors = ["Course infrastructure"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+# ---------------------------------------------------------------- runtime
+[dependencies]
+python = ">=3.11,<3.13"
+quarto = ">=1.5"
+jupyter = "*"
+jupyter_core = "*"
+nbformat = "*"
+nbclient = "*"
+ipykernel = "*"
+pyyaml = "*"
+
+# Libraries used by the example notebooks; extend as your lectures need.
+numpy = "*"
+scipy = "*"
+pandas = "*"
+matplotlib = "*"
+scikit-learn = "*"
+scikit-image = "*"
+graphviz = "*"          # provides `dot`
+python-graphviz = "*"
+pydot = "*"
+
+# Slides -> PDF via headless chromium.
+playwright = "*"
+
+[pypi-dependencies]
+# nothing required by default
+
+# ------------------------------------------------------------------ tasks
+[tasks]
+
+# One-off setup: TeX distribution for the PDF notes and a browser for
+# printing the slides.  Run once after `pixi install`.
+setup = { cmd = "quarto install tinytex --update-path && playwright install chromium", description = "Install TinyTeX and Chromium" }
+
+# --- assembling ---------------------------------------------------------
+# Turn the notebooks into generated .qmd files without rendering.
+assemble = { cmd = "python scripts/build.py assemble", description = "Generate .qmd sources from the notebooks" }
+
+# --- per-lecture rendering ---------------------------------------------
+# Trailing arguments select lectures, e.g.  pixi run slides Lecture02
+slides = { cmd = "python scripts/build.py slides", description = "Render revealjs slides (default: all lectures)" }
+notes = { cmd = "python scripts/build.py notes", description = "Render PDF lecture notes (default: all lectures)" }
+lecture = { cmd = "python scripts/build.py lecture", description = "Render slides + notes for a lecture" }
+slides-pdf = { cmd = "python scripts/build.py slides-pdf", description = "Render slides and print them to PDF" }
+
+# --- whole course -------------------------------------------------------
+course = { cmd = "python scripts/build.py course", description = "Build one PDF containing all lectures" }
+all = { cmd = "python scripts/build.py all", description = "Slides + notes for every lecture, plus the course PDF" }
+
+# --- convenience shortcuts ---------------------------------------------
+lecture01 = { cmd = "python scripts/build.py lecture Lecture01", description = "Slides + notes for Lecture 01" }
+lecture02 = { cmd = "python scripts/build.py lecture Lecture02", description = "Slides + notes for Lecture 02" }
+
+# --- authoring ----------------------------------------------------------
+lab = { cmd = "jupyter lab", description = "Open JupyterLab to edit the notebooks" }
+preview = { cmd = "python scripts/build.py assemble && quarto preview", description = "Live preview of the assembled sources" }
+
+# --- housekeeping -------------------------------------------------------
+clean = { cmd = "python scripts/build.py clean", description = "Remove generated sources, _output, .quarto and _freeze" }

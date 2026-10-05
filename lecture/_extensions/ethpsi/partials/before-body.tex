@@ -1,0 +1,74 @@
+$if(has-frontmatter)$
+\frontmatter
+$endif$
+
+$if(course-title)$
+\renewcommand{\ethpsiCourseTitle}{$course-title$}
+$endif$
+
+% ====================================================================
+%  Title page
+% ====================================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\sffamily
+
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedleft
+  $if(psi-logo)$\includegraphics[height=1.25cm]{$psi-logo$}$endif$
+\end{minipage}
+
+\vspace{3.2cm}
+
+\noindent
+\begin{minipage}[c]{0.56\textwidth}
+  \raggedright
+  $if(course-title)$
+  {\large\color{psired}\MakeUppercase{$course-title$}}\\[1.1em]
+  $endif$
+  {\Huge\bfseries\color{ethblue}$title$\par}
+  $if(subtitle)$
+  \vspace{0.6em}
+  {\Large\color{ethgrey}$subtitle$\par}
+  $endif$
+
+  \vspace{0.9em}
+  {\color{ethblue}\rule{0.45\linewidth}{2pt}}
+
+  \vspace{1.4em}
+  $if(by-author)$
+  {\large $for(by-author)$$it.name.literal$$sep$, $endfor$\par}
+  $endif$
+  $if(institute)$
+  {\normalsize\color{ethgrey} $for(institute)$$institute$$sep$, $endfor$\par}
+  $endif$
+  $if(date)$
+  \vspace{0.5em}
+  {\normalsize\color{ethgrey}$date$\par}
+  $endif$
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.38\textwidth}
+  \raggedleft
+  $if(artwork)$\includegraphics[width=\linewidth]{$artwork$}$endif$
+\end{minipage}
+
+\vfill
+\end{titlepage}
+
+% The table of contents is deliberately NOT emitted here.  Overriding this
+% partial removes Quarto's own toc hook, and rebuilding it here would depend
+% on the $toc$ / $toc-depth$ template variables being passed through.
+% scripts/build.py writes \tableofcontents into the document body instead,
+% which is plain content and cannot be affected by template wiring.
+% The format sets `toc: false` so there is exactly one table of contents.
+
+$if(has-frontmatter)$
+\mainmatter
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$

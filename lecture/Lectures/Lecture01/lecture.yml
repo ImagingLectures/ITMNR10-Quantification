@@ -1,0 +1,15 @@
+# ---------------------------------------------------------------------------
+# Lecture-level metadata. Anything set here overrides course.yml.
+# ---------------------------------------------------------------------------
+
+number: 1                       # level 0 -> chapter number in the PDF notes
+title: "Introduction"
+subtitle: "Overview of the course and its goals"
+date: "24 September 2026"
+
+# Lecture-specific artwork shown on the title slide / title page.
+# Keep an .svg and a .png (or .pdf) side by side: the .svg is used for the
+# slides, the raster/PDF twin is picked up automatically for LaTeX.
+artwork: assets/artwork/lecture01.svg
+
+# author: "Dr. Guest Lecturer"   # uncomment to override the course author
