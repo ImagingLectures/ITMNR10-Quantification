@@ -6,8 +6,7 @@
 # Lectures/LectureNN/lecture.yml.
 # ---------------------------------------------------------------------------
 
-title: "Quantification and uncertainties in neutron imaging"
-short-title: "ITMNR-10 Lecture"
+title: "ITMNR-10 Lecture"
 
 author: "Dr. Anders Kaestner"
 institute: "Paul Scherrer Institut"
@@ -23,4 +22,4 @@ psi-logo: assets/logos/psi-logo.svg
 
 # Artwork used on the title page of the complete course notes.
 # Per-lecture artwork is set in Lectures/LectureNN/lecture.yml.
-artwork: assets/artwork/course.svg
+artwork: assets/artwork/itmr-lecture.png

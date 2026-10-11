@@ -3,13 +3,13 @@
 # ---------------------------------------------------------------------------
 
 number: 1                       # level 0 -> chapter number in the PDF notes
-title: "Introduction"
-subtitle: "Overview of the course and its goals"
+title: "Uncertainties and quantification in neutron imaging"
+subtitle: "An introduction"
 date: "24 September 2026"
 
 # Lecture-specific artwork shown on the title slide / title page.
 # Keep an .svg and a .png (or .pdf) side by side: the .svg is used for the
 # slides, the raster/PDF twin is picked up automatically for LaTeX.
-artwork: assets/artwork/lecture01.svg
+artwork: assets/artwork/itmnr-lecture.png
 
 # author: "Dr. Guest Lecturer"   # uncomment to override the course author

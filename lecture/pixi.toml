@@ -27,6 +27,12 @@ scikit-image = "*"
 graphviz = "*"          # provides `dot`
 python-graphviz = "*"
 pydot = "*"
+tqdm = "*"
+seaborn = "*"
+astropy = "*"
+tifffile = "*"
+shapely = ">=2.1.2,<3"
+uncertainties = "*"
 
 # Slides -> PDF via headless chromium.
 playwright = "*"
