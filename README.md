@@ -9,7 +9,7 @@
 
 The notebooks can be run in Colab sessions
 
-- [Capillary rise ](x)
-- [Pixel size](x)
-- [Estimating attenuation coefficient](x)
+- [Capillary rise ](https://github.com/ImagingELearning/QuantifyingNeutronImages)
+- [Pixel size](https://github.com/ImagingELearning/resolution)
+- [Estimating attenuation coefficient](https://github.com/ImagingELearning/QuantifyingNeutronImages)
 
